@@ -21,6 +21,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import './../assets/less/cloudhub.ui.less';
+
 .header{
   position: relative;
   padding: 0 22px;
@@ -36,7 +38,7 @@ export default {
     position: absolute;
     margin-top: 20px;
     font-size: 18px;
-    color: #fff;
+    color: @white;
     letter-spacing: 0px;
 
     .sub-title{
@@ -48,7 +50,7 @@ export default {
     display: inline-block;
     margin-top: 17px;
     font-size: 16px;
-    color: #fff;
+    color: @white;
     line-height: 2;
   }
   .exit-btn{
@@ -58,8 +60,8 @@ export default {
     margin-left: 16px;
     padding: 8px 18px;
     font-size: 12px;
-    color: #3CBAFF;
-    background-color: #fff;
+    color: @bg-blue-lighter;
+    background-color: @white;
     border-radius: 71px;
     cursor: pointer;
   }

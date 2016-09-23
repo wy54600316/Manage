@@ -1,0 +1,73 @@
+/* display */
+.block {
+  display: block !important;
+}
+.inline {
+  display: inline !important;
+}
+.inline-block {
+  display: inline-block !important;
+}
+.hide {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* block */
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.nbfc {
+  overflow: hidden;
+}
+
+/* text */
+.text-ellipsis{
+  .text-overflow();
+}
+.text-line-clamp{
+  .text-line-clamp(2);
+}
+.text-hide{
+  .text-hide();
+}
+
+/* 遮罩层 */
+.mask-dimmer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: @dimmer-bg-color;
+  z-index: 1000;
+  opacity: .2;
+}
+.dialog{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1001;
+}
+
+/* 元素切换默认动画 */
+.expand-transition {
+  transition: all .3s ease;
+  height: initial; /* 一般情况下元素高度在组件中根据需要再定义 */
+  overflow: hidden;
+  opacity: 1;
+}
+.expand-enter, .expand-leave {
+  height: 0;
+  opacity: 0;
+}

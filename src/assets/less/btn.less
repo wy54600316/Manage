@@ -1,0 +1,61 @@
+/* 云之家PC端按钮统一样式表 */
+.btn{
+  display: inline-block;
+  padding: 6px 26px;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  border-radius: 72px;
+  cursor: pointer;
+
+  background-color: #3cbaff;
+  &:hover{
+    background-color: #35a8e8;
+  }
+
+  &.main-btn{ /* 常规 */
+    background-color: #3cbaff;
+    &:hover{
+      background-color: #35a8e8;
+    }
+  }
+  &.cancel-btn{ /* 取消 */
+    color: #3d464a;
+    background-color: #e9ecf1;
+    &:hover{
+      background-color: #e0e3e8;
+    }
+  }
+  &.danger-btn{ /* 危险 */
+    background-color: #f35959;
+    &:hover{
+      background-color: #f15a59;
+    }
+  }
+  &.warn-btn{ /* 警告 */
+    background-color: #f7bf28;
+    &:hover{
+      background-color: #edb826;
+    }
+  }
+  &.success-btn{ /* 成功 */
+    background-color: #94d301;
+    &:hover{
+      background-color: #8ecb01;
+    }
+  }
+  &.reverse-btn{ /* 反转 */
+    background-color: #6b777d;
+    &:hover{
+      background-color: #677278;
+    }
+  }
+  &.exit-btn{ /* 退出 */
+    color: #3d464a;
+    background-color: #fff;
+    border: 1px solid #e9ecf1;
+    &:hover{
+      background-color: #f1f3f7;
+    }
+  }
+}

@@ -1,50 +1,14 @@
 <!-- 左侧导航面板 -->
 <template>
   <nav class="manage-nav">
-    <div class="nav-item">
-      <a v-link="{'path': '/team/basic'}" v-bind:class="{'focus': $route.path.indexOf('team') != -1 || $route.path == '/'}">
-        <img class="nav-icon" src="./../assets/img/i-team.png">
-        <div class="nav-title">团队</div>
+    <div class="nav-item" v-for="item of navitems" track-by="$index">
+      <a v-link="{'path': item.link}" v-bind:class="{'focus': $route.path.indexOf(item.preRoute) != -1}">
+        <img class="nav-icon" :src="item.img">
+        <div class="nav-title">{{item.title}}</div>
       </a>
-      <ul class="sub-item" v-show="$route.path.indexOf('team') != -1 || $route.path == '/'" transition="expand">
-        <li><a v-link="{'path': '/team/basic'}" v-bind:class="{'focus': $route.path.indexOf('/team/basic') != -1 || $route.path == '/'}">基本信息</a></li>
-        <li><a v-link="{'path': '/team/setting'}" v-bind:class="{'focus': $route.path.indexOf('/team/setting') != -1}">团队设置</a></li>
-      </ul>
-    </div>
-    <div class="nav-item">
-      <a v-link="{'path': '/org/ha'}" v-bind:class="{'focus': $route.path.indexOf('org') != -1}">
-        <img class="nav-icon" src="./../assets/img/i-org.png">
-        <div class="nav-title">组织</div>
-      </a>
-      <ul class="sub-item" v-show="$route.path.indexOf('org') != -1" transition="expand">
-        <li><a v-link="{'path': '/org/ha'}" v-bind:class="{'focus': $route.path.indexOf('/org/ha') != -1}">ha</a></li>
-        <li><a v-link="{'path': '/org/hei'}" v-bind:class="{'focus': $route.path.indexOf('/org/hei') != -1}">hei</a></li>
-      </ul>
-    </div>
-    <div class="nav-item">
-      <a v-link="{'path': '/app'}" v-bind:class="{'focus': $route.path.indexOf('app') != -1}">
-        <img class="nav-icon" src="./../assets/img/i-application.png">
-        <div class="nav-title">应用</div>
-      </a>
-    </div>
-    <div class="nav-item">
-      <a v-link="{'path': '/pubacc/ha'}" v-bind:class="{'focus': $route.path.indexOf('pubacc') != -1}">
-        <img class="nav-icon" src="./../assets/img/i-pub.png">
-        <div class="nav-title">公共号</div>
-      </a>
-      <ul class="sub-item" v-show="$route.path.indexOf('pubacc') != -1" transition="expand">
-        <li><a v-link="{'path': '/pubacc/ha'}" v-bind:class="{'focus': $route.path.indexOf('/pubacc/ha') != -1}">ha</a></li>
-        <li><a v-link="{'path': '/pubacc/hei'}" v-bind:class="{'focus': $route.path.indexOf('/pubacc/hei') != -1}">hei</a></li>
-        <li><a v-link="{'path': '/pubacc/ha1'}" v-bind:class="{'focus': $route.path.indexOf('/pubacc/ha1') != -1}">ha1</a></li>
-        <li><a v-link="{'path': '/pubacc/hei1'}" v-bind:class="{'focus': $route.path.indexOf('/pubacc/hei1') != -1}">hei1</a></li>
-        <li><a v-link="{'path': '/pubacc/ha2'}" v-bind:class="{'focus': $route.path.indexOf('/pubacc/ha2') != -1}">ha2</a></li>
-        <li><a v-link="{'path': '/pubacc/hei2'}" v-bind:class="{'focus': $route.path.indexOf('/pubacc/hei2') != -1}">hei2</a></li>
-        <li><a v-link="{'path': '/pubacc/ha3'}" v-bind:class="{'focus': $route.path.indexOf('/pubacc/ha3') != -1}">ha3</a></li>
-        <li><a v-link="{'path': '/pubacc/hei3'}" v-bind:class="{'focus': $route.path.indexOf('/pubacc/hei3') != -1}">hei3</a></li>
-        <li><a v-link="{'path': '/pubacc/ha4'}" v-bind:class="{'focus': $route.path.indexOf('/pubacc/ha4') != -1}">ha4</a></li>
-        <li><a v-link="{'path': '/pubacc/hei4'}" v-bind:class="{'focus': $route.path.indexOf('/pubacc/hei4') != -1}">hei4</a></li>
-        <li><a v-link="{'path': '/pubacc/ha5'}" v-bind:class="{'focus': $route.path.indexOf('/pubacc/ha5') != -1}">ha5</a></li>
-        <li><a v-link="{'path': '/pubacc/hei5'}" v-bind:class="{'focus': $route.path.indexOf('/pubacc/hei5') != -1}">hei5</a></li>
+      <ul v-if="item.subitems" v-show="$route.path.indexOf(item.preRoute) != -1" 
+        class="sub-item" transition="expand">
+        <li v-for="subitem of item.subitems"><a v-link="{'path': subitem.link}" v-bind:class="{'focus': $route.path == subitem.link}">{{subitem.title}}</a></li>
       </ul>
     </div>
   </nav>
@@ -54,8 +18,72 @@
 export default {
   data () {
     return {
-      data: {
-      }
+      navitems: [
+        { /* 团队 */
+          img: require('./../assets/img/i-team.png'),
+          title: '团队',
+          link: '/team/basic',
+          preRoute: '/team', // 一级路由,此处用于聚焦导航的一级菜单
+          subitems: [
+            {
+              title: '团队概况',
+              link: '/team/basic'
+            },
+            {
+              title: '团队信息',
+              link: '/team/setting'
+            }
+          ]
+        },
+        { /* 组织 */
+          img: require('./../assets/img/i-org.png'),
+          title: '组织',
+          link: '/org/ha',
+          preRoute: '/org',
+          subitems: [
+            {
+              title: 'ha',
+              link: '/org/ha'
+            },
+            {
+              title: 'hei',
+              link: '/org/hei'
+            }
+          ]
+        },
+        { /* 应用 */
+          img: require('./../assets/img/i-application.png'),
+          title: '应用',
+          link: '/app/ha',
+          preRoute: '/app',
+          subitems: [
+            {
+              title: 'ha',
+              link: '/app/ha'
+            },
+            {
+              title: 'hei',
+              link: '/app/hei'
+            }
+          ]
+        },
+        { /* 公共号 */
+          img: require('./../assets/img/i-pub.png'),
+          title: '公共号',
+          link: '/pubacc/a',
+          preRoute: '/pubacc',
+          subitems: [
+            {
+              title: 'a',
+              link: '/pubacc/a'
+            },
+            {
+              title: 'b',
+              link: '/pubacc/b'
+            }
+          ]
+        }
+      ]
     }
   },
   methods: {
@@ -64,14 +92,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@mainColor: #3CBAFF;
-@fontColor: #3D464A;
+@import './../assets/less/cloudhub.ui.less';
 
 .manage-nav{
   padding: 20px 0;
   a{
     font-size: 12px;
-    color: @fontColor;
+    color: @font-dark-lighter;
   }
 
   .nav-item {
@@ -96,15 +123,11 @@ export default {
         content: '';
         top: 18px;
         right: 20px;
-        width: 0;
-        height: 0;
-        border-left: 7px solid transparent;
-        border-right: 7px solid transparent;
-        border-top: 8px solid #98A0AA;
+        .caret-down(7px, #98A0AA);
         transition: .3s;
       }
       &.focus:after{
-        transform: rotate(-180deg);
+        .rotate(180deg);
       }
     }
 
@@ -121,7 +144,7 @@ export default {
 
           &.focus{
             background-color: #F1F3F7;
-            color: @mainColor;
+            color: @bg-blue-lighter;
 
             &:before{
               position: absolute;
@@ -130,7 +153,7 @@ export default {
               bottom: 0;
               left: 0;
               width: 5px;
-              background-color: @mainColor;
+              background-color: @bg-blue-lighter;
             }
           }
 
@@ -143,9 +166,7 @@ export default {
   }
 
   .expand-transition {
-    transition: all .3s ease;
     height: initial;
-    overflow: hidden;
     opacity: 1;
   }
   .expand-enter, .expand-leave {
